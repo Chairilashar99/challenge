@@ -120,6 +120,14 @@ if (args[2] == 'tag') {
     fs.writeFileSync('todo.json', JSON.stringify(data, null, 3), 'utf-8')
     console.log(`Tag ${a} telah ditambahkan ke daftar ${data[x].pekerjaan}`)
 }
+if (args[2] == 'filter:') {
+    console.log('Daftar Pekerjaan')
+    for (let i = 0; i < data.length; i++) {
+        if (data[i].tag_name.includes(args[3])) {
+            console.log(`${i + 1} [${data[i].selesai ? "X" : " "}] ${data[i].pekerjaan}`)
+        }
+    }
+}
 
 
 
