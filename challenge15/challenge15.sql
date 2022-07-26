@@ -29,8 +29,7 @@ WHERE
     Nilai = 'AB'
     OR nilai = 'A';
 
-4.
-SELECT
+4.SELECT
     kontrak.NIM,
     Mahasiswa.Nama,
     sum(Matakuliah.SKS) AS SKS
@@ -43,8 +42,7 @@ GROUP BY
 HAVING
     sum(Matakuliah.SKS) > 10;
 
-5.
-SELECT
+5.SELECT
     kontrak.NIM,
     Mahasiswa.Nama,
     kontrak.NIDN,
@@ -60,8 +58,7 @@ FROM
 WHERE
     kontrak.Kodematakuliah = 'D126';
 
-6.
-SELECT
+6.SELECT
     kontrak.NIDN,
     Dosen.Namadosen,
     count(Mahasiswa.NIM) AS Mahasiswa
@@ -72,8 +69,7 @@ FROM
 GROUP BY
     Dosen.Namadosen;
 
-7.
-SELECT
+7.SELECT
     *
 FROM
     Mahasiswa
