@@ -61,7 +61,7 @@ WHERE
 6.SELECT
     kontrak.NIDN,
     Dosen.Namadosen,
-    count(Mahasiswa.NIM) AS Mahasiswa
+    count(distinct Mahasiswa.NIM) AS Mahasiswa
 FROM
     kontrak
     JOIN Dosen ON kontrak.NIDN = Dosen.NIDN
