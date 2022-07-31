@@ -23,7 +23,7 @@ export default class MesinHitung {
         return this;
     }
     pangkat() {
-        this.x = Math.pow(4,3)
+        this.x = Math.pow(this.x,3)
         return this;
     }
     akarPangkat() {
@@ -31,7 +31,7 @@ export default class MesinHitung {
         return this;
     }
     pangkatDua() {
-        this.x = this.x ** 2
+        this.x = Math.pow(this.x,2)
         return this;
     }
 
