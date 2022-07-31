@@ -22,8 +22,8 @@ export default class MesinHitung {
         this.x *= value;
         return this;
     }
-    pangkat() {
-        this.x = Math.pow(this.x,3)
+    pangkat(value) {
+        this.x = Math.pow(this.x,value)
         return this;
     }
     akarPangkat() {
