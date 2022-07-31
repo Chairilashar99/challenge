@@ -3,6 +3,7 @@ export const Pi = 22/7
 export default class MesinHitung {
     constructor() {
         this.x = 1
+
     }
 
     tambah(value) {
