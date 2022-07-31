@@ -1,4 +1,4 @@
-import MesinHitung from "./challenge17.mjs";
+import MesinHitung, {Pi} from "./challenge17.mjs";
 
 var mh = new MesinHitung();
 mh.tambah(10).kurang(5).result();
