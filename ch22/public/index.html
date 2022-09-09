@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>BREADS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel="stylesheet" href="/fontawesome/css/all.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="shortcut icon" href="#">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            outline: none;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        html,
+        body {
+            display: grid;
+            height: 100%;
+            place-items: center;
+            text-align: center;
+            background: #dde1e7;
+        }
+
+        .container {
+            background: #dde1e7;
+            padding: 70px;
+            border-radius: 3px;
+            box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+        }
+
+        .pagination li {
+            flex: 1;
+            margin: 0px 10px;
+            background: #dde1e7;
+            border-radius: 3px;
+            box-shadow: -3px -3px 7px #ffffff73, 3px 3px 5px rgba(94, 104, 121, 0.288);
+        }
+
+        .pagination li a {
+            font-size: 18px;
+            text-decoration: none;
+            color: #4d3252;
+            height: 45px;
+            width: 65px;
+            display: block;
+            line-height: 34px;
+        }
+
+        .pagination li:first-child a {
+            width: 110px;
+        }
+
+        .pagination li:last-child a {
+            width: 110px;
+        }
+
+        .pagination li.active {
+            box-shadow: inset -3px -3px 7px #ffffff73,
+                inset 3px 3px 5px rgba(94, 104, 121, 0.288);
+        }
+
+        .pagination li.active a {
+            font-size: 17px;
+        }
+
+        .pagination li:first-child {
+            margin: 0 15px 0 0;
+        }
+
+        .pagination li:last-child {
+            margin: 0 0 0 15px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card-header">
+            <h1>Daftar Anggota</h1>
+            <form id="form-search">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Form Pencarian</h2>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row mb-3">
+                            <label for="searchName" class="col-sm-2 col-form-label">String</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="searchstrings" name="searchstrings">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="searchinteger" class="col-sm-2 col-form-label">Integer</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="searchintegers" name="searchintegers"
+                                    step="any">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="searchfloat" class="col-sm-2 col-form-label">Float</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="searchfloats" name="searchfloats"
+                                    step='any'>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="searchdate1" class="col-sm-2 col-form-label">Date</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="searchdates1" name="searchdate1">
+                            </div>
+                        </div>
+                        <p>to</p>
+                        <div class="row mb-3">
+                            <label for="searchdate2" class="col-sm-2 col-form-label">Date</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="searchdates2" name="searchdate2">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="searchBooleans" class="col-sm-2 col-form-label">Booelan</label>
+                            <div class="col-sm-10">
+                                <select name="searchBooleans" id="searchBooleans" class="form-control">
+                                    <option value="">--pilih status--</option>
+                                    <option value="false">False</option>
+                                    <option value="true">True</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a href="/" class="btn btn-primary" id="clear">Clear</a>
+                        <button type="submit" class="btn btn-warning">Search</button>
+                    </div>
+                </div>
+            </form>
+
+
+            <table class="table table-striped">
+                <thead id="sorting">
+                    <tr>
+                        <th>No.</th>
+                        <th>String</th>
+                        <th>Integer</th>
+                        <th>Float</th>
+                        <th>Date</th>
+                        <th>Boolean</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="body-users">
+                </tbody>
+            </table>
+
+            <div class="row">
+                <div class="col-6">
+                    <ul aria-label="Page navigation" id="pagination">
+                    </ul>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                    </div>
+                </div>
+
+            </div>
+            <form id="form-user">
+                <input type="hidden" id="id" name="id" value="">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Form Add/Edit</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <label for="string1" class="col-sm-2 col-form-label">String</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="string1" name="string1">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="integer1" class="col-sm-2 col-form-label">Integer</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="integer1" name="integer1" step="any"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="float1" class="col-sm-2 col-form-label">Float</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="float1" name="float1" step="0.01"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="date1" class="col-sm-2 col-form-label">Date</label>
+                            <div class="col-sm-10">
+                                <input type="date" class="form-control" id="date1" name="date1" required>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="boolean1" class="col-sm-2 col-form-label">Booelan</label>
+                            <div class="col-sm-10">
+                                <select name="boolean1" id="boolean1" class="form-control">
+                                    <option value="">--pilih status--</option>
+                                    <option value="false">False</option>
+                                    <option value="true">True</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="/" class="btn btn-primary">Clear</a>
+                            <button type="submit" class="btn btn-warning">Save</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+</body>
+<script>
+    let idEdit = null;
+
+    var file = {
+        display: 3,
+        page: 1
+
+    }
+    var sortstring = 'a'
+    var sortinteger = 'a'
+    var sortfloat = 'a'
+    var sortdate = 'a'
+    var sortboolean = 'a'
+
+    const readData = () => {
+        fetch(`http://localhost:3000/users?${new URLSearchParams(file).toString()}`)
+            .then((response) => response.json())
+            .then((response) => {
+                file = { ...file, totalPages: response.totalPages }
+                let html = ''
+
+                response.data.forEach((item, index) => {
+                    html += `
+  <tr>
+    <td>${index + 1 + ((file.page - 1) * file.display)}</td>
+    <td>${item.strings}</td>
+    <td>${item.integers}</td>
+    <td>${item.floats}</td>
+    <td>${item.dates}</td>
+    <td>${item.booleans}</td>
+    <td>
+      <button type="button" class="btn btn-success" onclick='editData(${JSON.stringify(item)})'><i class="fa-solid fa-pencil"></i></button>
+      <button type="button" class="btn btn-danger" onclick="removeData('${item._id}')"><i class="fa-solid fa-trash-can"></i></button>
+    </td>
+  </tr>
+  `
+                });
+                document.getElementById('body-users').innerHTML = html;
+                pagination(file);
+                sorter()
+
+            });
+
+
+    }
+
+    const saveData = (strings, integers, floats, dates, booleans) => {
+
+        if (idEdit == null) {
+
+            fetch("http://localhost:3000/users", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ strings, integers, floats, dates, booleans })
+            }).then((response) => {
+                response.json();
+            }).then((response) => {
+                readData();
+                document.getElementById('form-user').reset();
+            });
+        } else {
+            fetch(`http://localhost:3000/users/${idEdit}`, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ strings, integers, floats, dates, booleans })
+            }).then((response) => {
+                response.json();
+            }).then((response) => {
+                readData();
+                document.getElementById('form-user').reset();
+            });
+            idEdit = null;
+        }
+    }
+
+    const removeData = (id) => {
+        fetch(`http://localhost:3000/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then((response) => response.json()).then((data) => {
+            readData()
+        })
+    }
+
+    const editData = (user) => {
+        idEdit = user._id
+        document.getElementById('id').value = user._id
+        document.getElementById('string1').value = user.strings
+        document.getElementById('integer1').value = user.integers
+        document.getElementById('float1').value = user.floats
+        document.getElementById('date1').value = user.dates
+        document.getElementById('boolean1').value = user.booleans
+
+    }
+
+    document.getElementById('form-user').addEventListener('submit', function (event) {
+        event.preventDefault()
+        const strings = document.getElementById('string1').value
+        const integers = document.getElementById('integer1').value
+        const floats = document.getElementById('float1').value
+        const dates = document.getElementById('date1').value
+        const booleans = document.getElementById('boolean1').value
+        console.log(id, strings, integers, floats, dates, booleans)
+        saveData(strings, integers, floats, dates, booleans)
+    })
+
+    document.getElementById('form-search').addEventListener('submit', function (event) {
+        event.preventDefault();
+        const strings = document.getElementById('searchstrings').value
+        const integers = document.getElementById('searchintegers').value
+        const floats = document.getElementById('searchfloats').value
+        const dates1 = document.getElementById('searchdates1').value
+        const dates2 = document.getElementById('searchdates2').value
+        const booleans = document.getElementById('searchBooleans').value
+        file = { ...file, strings, integers, floats, dates1, dates2, booleans }
+        readData()
+    })
+
+    document.getElementById('pagination').onclick = e => {
+        e.preventDefault()
+        file = { ...file, page: parseInt(e.target.getAttribute('datapage')) };
+        readData()
+    }
+
+    const pagination = (file) => {
+        let pagination = `<ul class="pagination">
+                      <li class="page-item${file.page == 1 ? ' disabled' : ''}">
+                          <a class="page-link" href="#" datapage="${parseInt(file.page) - 1}" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                          </a>
+                      </li>`
+
+        for (let i = 1; i <= file.totalPages; i++) {
+            pagination += `
+      <li class="page-item${i == file.page ? ' active' : ''}"><a class="page-link" href="#" datapage="${i}">${i}</a></li>
+      `
+        }
+
+        pagination += `<li class="page-item${file.page == file.totalPages ? ' disabled' : ''}">
+                          <a class="page-link" href="#" datapage="${parseInt(file.page) + 1}" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                          </a>
+                      </li>
+                  </ul>`
+
+        document.getElementById('pagination').innerHTML = pagination
+    }
+
+    const sorter = () => {
+        let html = `<tr>
+                    <th>No.</th>
+                    <th><a href="#" id="string" datapage="strings">
+                        <i class="fa-solid fa-${sortstring == 'a' ? `sort` : sortstring == true ? `sort-up` : `sort-down`}"></i>
+                        String</a>
+                    </th>
+                    <th><a href="#" id="integer" datapage="integers">
+                        <i class="fa-solid fa-${sortinteger == 'a' ? `sort` : sortinteger == true ? `sort-up` : `sort-down`}"></i>
+                            Integer</a>
+                    </th>
+                    <th><a href="#" id="float" datapage="floats">
+                        <i class="fa-solid fa-${sortfloat == 'a' ? `sort` : sortfloat == true ? `sort-up` : `sort-down`}"></i>
+                            Float</a>
+                    </th>
+                    <th><a href="#" id="date" datapage="dates">
+                        <i class="fa-solid fa-${sortdate == 'a' ? `sort` : sortdate == true ? `sort-up` : `sort-down`}"></i>
+                            Date</a>
+                    </th>
+                    <th><a href="#" id="boolean" datapage="booleans">
+                        <i class="fa-solid fa-${sortboolean == 'a' ? `sort` : sortboolean == true ? `sort-up` : `sort-down`}"></i>
+                            Boolean</a>
+                    </th>
+                    <th>Actions</th>
+                </tr>`
+
+
+        document.querySelector('table thead').innerHTML = html;
+    }
+    document.getElementById('sorting').onclick = e => {
+        e.preventDefault()
+        if(e.target.getAttribute('datapage') == 'strings'){
+        sortstring = sortstring == 'a' ? true : !sortstring
+        file = { ...file, sortBy: e.target.getAttribute('datapage'), sortMode:  sortstring == true ? '1' : '-1' };
+        sortinteger = 'a'
+        sortfloat = 'a'
+        sortdate = 'a'
+        sortboolean = 'a'
+        readData()
+        } else if(e.target.getAttribute('datapage') == 'integers'){
+        sortinteger = sortinteger == 'a' ? true : !sortinteger
+        file = { ...file, sortBy: e.target.getAttribute('datapage'), sortMode:  sortinteger == true ? '1' : '-1' };
+        sortstring = 'a'
+        sortfloat = 'a'
+        sortdate = 'a'
+        sortboolean = 'a'
+        readData()
+        } else if(e.target.getAttribute('datapage') == 'floats'){
+        sortfloat = sortfloat == 'a' ? true : !sortfloat
+        file = { ...file, sortBy: e.target.getAttribute('datapage'), sortMode:  sortfloat == true ? '1' : '-1' };
+        sortstring = 'a'
+        sortinteger = 'a'
+        sortdate = 'a'
+        sortboolean = 'a'
+        readData()
+        } else if(e.target.getAttribute('datapage') == 'dates'){
+        sortdate = sortdate == 'a' ? true : !sortdate
+        file = { ...file, sortBy: e.target.getAttribute('datapage'), sortMode:  sortdate == true ? '1' : '-1' };
+        sortstring = 'a'
+        sortinteger = 'a'
+        sortfloat = 'a'
+        sortboolean = 'a'
+        readData()
+        } else if(e.target.getAttribute('datapage') == 'booleans'){
+        sortboolean = sortboolean == 'a' ? true : !sortboolean
+        file = { ...file, sortBy: e.target.getAttribute('datapage'), sortMode:  sortboolean == true ? '1' : '-1' };
+        sortstring = 'a'
+        sortinteger = 'a'
+        sortfloat= 'a'
+        sortdate = 'a'
+        readData()
+        }
+    }
+
+
+
+    readData()
+
+</script>
+</body>
+
+</html>

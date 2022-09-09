@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataList</title>
+
+    <style>
+        div {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 15px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+
+    <style>
+        #styletable {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #styletable td {
+            border: 2px groove;
+            padding: 8px;
+        }
+
+        #styletable th {
+
+            border: 2px groove;
+            padding: 8px;
+        }
+
+        #styletable tr:nth-child(even) {
+            background-color: #fdfdfb;
+        }
+
+        #styletable tr:hover {
+            background-color: #ddd;
+        }
+
+        #styletable th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #000000;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>BREAD(Browse,Read,Edit,Add,Delete)</h2>
+    <div>
+        <table id="styletable">
+            <thead>
+                <tr>
+                    <th>Nomor</th>
+                    <th>String</th>
+                    <th>Integer</th>
+                    <th>Float</th>
+                    <th>Date</th>
+                    <th>Boolean</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <style>
+                    body {
+                        background-image: linear-gradient(to right, #003973,  #e5e5be, #f7ff00, #db36a4 );
+                        background-size: 400% 400%;
+                        animation: gradient 15s ease infinite;
+                        height: 100vh;
+                    }
+
+                    @keyframes gradient {
+                        0% {
+                            background-position: 0% 50%;
+                        }
+                        
+                        25% {
+                            background-position: 50% 100%;
+                        }
+
+                        75% {
+                            background-position: 100% 150%;
+                        }
+
+                        100% {
+                            background-position: 0% 50%;
+                        }
+                    }
+
+                    h2 {
+                        color: black;
+                        text-align: center;
+                        text-decoration-color: black;
+                    }
+
+                    .tombol {
+                        background-color: #ffffff;
+                        transition-duration: 0.5s;
+                        color: rgb(0, 0, 0);
+                        padding: 15px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        border-radius: 12px;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                    }
+
+                    .tomboldelete {
+                        background-color: #000000;
+                        border: none;
+                        border-radius: 10px;
+                        color: white;
+                        padding: 15px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                    }
+
+                    .tomboldelete:hover {
+                        background-color: #ca0909;
+                    }
+
+                    .tomboledit {
+                        background-color: #000000;
+                        border: none;
+                        border-radius: 10px;
+                        color: white;
+                        padding: 15px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                    }
+
+                    .tomboledit:hover {
+                        background-color: #ca0909;
+                    }
+
+                    .tomboltambah {
+                        background-color: #000000;
+                        border: none;
+                        border-radius: 10px;
+                        color: white;
+                        padding: 15px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                    }
+
+                    .tomboltambah:hover {
+                        background-color: #ca0909;
+                    }
+
+                </style>
+                <% list.forEach((item, index)=> { %>
+                    <tr>
+                        <td>
+                            <%= index + 1 %>
+                        </td>
+                        <td>
+                            <%= item.String %>
+                        </td>
+                        <td>
+                            <%= item.Integer %>
+                        </td>
+                        <td>
+                            <%= item.Float %>
+                        </td>
+                        <td>
+                            <%= item.Date %>
+                        </td>
+                        <td>
+                            <%= item.Boolean %>
+                        </td>
+                        <td>
+                            <a href="/delete/<%= index%>" class="tombol tomboldelete">Delete</a>
+                            <a href="/edit/<%= index%>" class="tombol tomboledit">Edit</a>
+                        </td>
+                    </tr>
+                    <%})%>
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <a href="/add" class="tombol tomboltambah"> Tambah</a>
+</body>
+
+</html>

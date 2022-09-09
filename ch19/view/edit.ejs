@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit data</title>
+
+    <script>
+        function Previous() {
+            window.history.back()
+        }
+    </script>
+    <style>
+        body {
+            background-image: linear-gradient(to right, #003973, #e5e5be, #f7ff00, #db36a4);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            height: 100vh;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 50% 100%;
+            }
+
+            75% {
+                background-position: 100% 150%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        h1 {
+            color: black;
+            text-align: center;
+            text-decoration-color: black;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        input[type=text],
+        [type=number],
+        [type=date],
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #000000;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input[type=submit]:hover {
+            background-color: #ca0909;
+        }
+
+        input[type=button] {
+            background-color: #000000;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        input[type=button]:hover {
+            background-color: #ca0909;
+        }
+
+        input[type=text]:focus,
+        input[type=number]:focus,
+        input[type=date]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 15px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Edit data </h1>
+        <div class="form">
+            <form action="" method="post">
+                String:<input type="text" id="Strings" name="String" placeholder="Masukkan String" /> <br /><br />
+                Integer: <input type="number" id="Integers" name="Integer" placeholder="Masukkan angka" /> <br /><br />
+                Float: <input type="number" step=0.01 id="Floats" name="Float" placeholder="Masukkan nilai decimal" />
+                <br /><br />
+                Date: <input type="date" id="Dates" name="Date" placeholder="Masukkan tanggal" /> <br /><br />
+                Bolean:<select name="Boolean" id="Booleans">
+                    <option value="True"> True</option>
+                    <option value="False"> False</option>
+                </select>
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="Save">
+    <input type="button" value="Back" onclick="history.back(-1)" />
+    </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,30 @@
+[
+   {
+      "pekerjaan": "ngepel",
+      "selesai": false,
+      "tag_name": [
+         "masak",
+         "ngepel"
+      ]
+   },
+   {
+      "pekerjaan": "masak",
+      "selesai": true,
+      "tag_name": []
+   },
+   {
+      "pekerjaan": "",
+      "selesai": false,
+      "tag_name": []
+   },
+   {
+      "pekerjaan": "",
+      "selesai": false,
+      "tag_name": []
+   },
+   {
+      "pekerjaan": [],
+      "selesai": false,
+      "tag_name": []
+   }
+]
